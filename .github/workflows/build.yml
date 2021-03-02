@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  tester:
+  test:
     runs-on: ubuntu-latest
     env:
       TESTERY_API_KEY: ${{ secrets.TESTERY_API_KEY }}
