@@ -1,0 +1,45 @@
+bin/
+*.orig
+out/
+*.log
+logs/
+out/
+temp/
+data/
+*.log
+logs/
+temp/
+
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+**/secret.yml
+**/src/main/resources/revision
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.kotlintest
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+temp--*
+temp-*.js
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### VS Code ###
+.vscode/
