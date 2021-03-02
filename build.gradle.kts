@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.31")
     implementation("com.github.jengelman.gradle.plugins:shadow:6.1.0")
     implementation("com.squareup.okhttp3:okhttp:4.2.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
