@@ -2,7 +2,7 @@ package io.testery
 
 import org.gradle.api.DefaultTask
 
-open class CreateDeploy : DefaultTask() {
+open class CreateDeployTask : DefaultTask() {
     fun createDeploy(options: TesteryPluginExtension) {
         options.validate(true)
 

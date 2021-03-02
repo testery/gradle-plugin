@@ -28,7 +28,7 @@ class TesteryPlugin  : Plugin<Project> {
             }
         }
 
-        project.tasks.register("createDeploy", CreateDeploy::class.java) {
+        project.tasks.register("createDeploy", CreateDeployTask::class.java) {
             it.group = taskGroup
             it.doLast { _ ->
                 it.createDeploy(extension)

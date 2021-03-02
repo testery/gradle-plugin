@@ -20,11 +20,20 @@ class TesteryPluginTests {
         project.pluginManager.hasPlugin("io.testery") shouldBe true
 
         project.tasks.getByName("uploadBuild")::class shouldNotBe CreateBuildTask::class
-        project.tasks.getByName("createDeploy")::class shouldNotBe CreateDeploy::class
+        project.tasks.getByName("createDeploy")::class shouldNotBe CreateDeployTask::class
     }
 
     @Test
     fun testUploadTaskConfig() {
+        val task = project.tasks.getByName("uploadBuild") as? CreateBuildTask
+
+        task shouldNotBe null
+        task?.archiveFileName?.get() shouldBe "testery.jar"
+        task?.description shouldBe "Upload jar file to Testery"
+    }
+
+    @Test
+    fun testCreateDeployTaskConfig() {
         val task = project.tasks.getByName("uploadBuild") as? CreateBuildTask
 
         task shouldNotBe null
