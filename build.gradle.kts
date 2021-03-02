@@ -5,7 +5,7 @@ plugins {
 }
 
 group "io.testery"
-project.version = "1.0"
+project.version = "1.1"
 
 repositories {
     mavenCentral()
