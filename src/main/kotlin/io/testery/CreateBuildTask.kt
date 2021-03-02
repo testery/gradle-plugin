@@ -20,7 +20,7 @@ open class CreateBuildTask : ShadowJar() {
         val file = project.file("build/libs/${TesteryPluginConstants.jarFile}")
 
         if(TesteryApi.uploadJarFile(file, url)){
-            println("Uploaded artifacts to Testery")
+            println("Uploaded artifacts to Testery for build ${options.buildId}")
         } else {
             throw Exception(failedMessage)
         }
