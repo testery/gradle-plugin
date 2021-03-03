@@ -14,7 +14,7 @@ object TesteryApi {
     private const val devUrl = "https://api.dev.testery.io/api"
     var useDevUrl = false
 
-    fun getUploadUrl(apiKey: String, projectKey: String, buildId: String, fileName: String, commit: String? = null, branch: String? = null): String? {
+    fun getUploadUrl(apiToken: String, projectKey: String, buildId: String, fileName: String, commit: String? = null, branch: String? = null): String? {
         var url = "$baseUrl/projects/$projectKey/upload-url?build=${buildId}&file=$fileName"
 
         if(commit != null) url += "&commit=$commit"
@@ -23,7 +23,7 @@ object TesteryApi {
         val request = Request.Builder()
             .url(url)
             .method("GET", null)
-            .addHeader("Authorization", "Bearer $apiKey")
+            .addHeader("Authorization", "Bearer $apiToken")
             .build()
 
         return client.newCall(request).execute().body?.string()
@@ -38,7 +38,7 @@ object TesteryApi {
         return client.newCall(request).execute().isSuccessful
     }
 
-    fun createDeploy(apiKey: String, projectKey: String, environmentKey: String, buildId: String? = null, commit: String? = null, branch: String? = null): Boolean {
+    fun createDeploy(apiToken: String, projectKey: String, environmentKey: String, buildId: String? = null, commit: String? = null, branch: String? = null): Boolean {
         val json = mapOf(
             "project" to projectKey,
             "environment" to environmentKey,
@@ -50,7 +50,7 @@ object TesteryApi {
         val request = Request.Builder()
             .url("$baseUrl/deploys")
             .method("POST", json.toRequestBody("application/json".toMediaType()))
-            .addHeader("Authorization", "Bearer $apiKey")
+            .addHeader("Authorization", "Bearer $apiToken")
             .build()
 
         return client.newCall(request).execute().isSuccessful

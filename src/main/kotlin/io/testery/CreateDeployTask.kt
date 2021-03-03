@@ -7,7 +7,7 @@ open class CreateDeployTask : DefaultTask() {
         options.validate(true)
 
         if(TesteryApi.createDeploy(
-                apiKey = options.apiKey!!,
+                apiToken = options.apiToken!!,
                 projectKey = options.projectKey!!,
                 environmentKey = options.environmentKey!!,
                 buildId = options.buildId!!,

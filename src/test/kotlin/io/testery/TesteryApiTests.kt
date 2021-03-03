@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class TesteryApiTests {
-    private val apiKey: String? = System.getenv("TESTERY_API_KEY")
+    private val apiToken: String? = System.getenv("TESTERY_API_TOKEN")
     private val projectKey = "example-specflow-dotnet-core"
     private val environmentKey = "testing"
 
@@ -17,11 +17,11 @@ class TesteryApiTests {
 
     @Test
     fun testUploadFile() {
-        if(apiKey == null) return
+        if(apiToken == null) return
 
         val jarFile = "testery.jar"
 
-        val url = TesteryApi.getUploadUrl(apiKey, projectKey, "1", jarFile)!!
+        val url = TesteryApi.getUploadUrl(apiToken, projectKey, "1", jarFile)!!
 
         val result = TesteryApi.uploadJarFile(File("src/test/resources/$jarFile"), url)
 
@@ -30,9 +30,9 @@ class TesteryApiTests {
 
     @Test
     fun testCreateDeploy() {
-        if(apiKey == null) return
+        if(apiToken == null) return
 
-        val result = TesteryApi.createDeploy(apiKey, projectKey, environmentKey, "1")
+        val result = TesteryApi.createDeploy(apiToken, projectKey, environmentKey, "1")
 
         result shouldBe true
     }

@@ -9,7 +9,7 @@ open class CreateBuildTask : ShadowJar() {
         options.validate(false)
 
         val url = TesteryApi.getUploadUrl(
-            apiKey = options.apiKey!!,
+            apiToken = options.apiToken!!,
             projectKey = options.projectKey!!,
             buildId = options.buildId!!,
             fileName = TesteryPluginConstants.jarFile,

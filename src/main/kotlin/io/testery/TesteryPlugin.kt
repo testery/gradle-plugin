@@ -43,7 +43,7 @@ class TesteryPlugin  : Plugin<Project> {
 fun TesteryPluginExtension.validate(requireEnvironment: Boolean = false) {
     val defaultConfig = """
         testery {
-            apiKey = System.getenv("TESTERY_API_KEY") // required
+            apiToken = System.getenv("TESTERY_API_TOKEN") // required
             projectKey = "my-testery-project-key" // required
             buildId = "myBuildId" // required
             commitHash = System.getenv("GIT_COMMIT") // optional
@@ -54,7 +54,7 @@ fun TesteryPluginExtension.validate(requireEnvironment: Boolean = false) {
 
     val messages = mutableListOf<String>()
 
-    if(apiKey == null) messages.add("You must configure your Testery API key.")
+    if(apiToken == null) messages.add("You must configure your Testery API token.")
     if(projectKey == null) messages.add("You must configure your Testery project key.")
     if(buildId == null) messages.add("You must configure a buildId.")
     if(environmentKey == null && requireEnvironment) messages.add("You must configure an environmentKey.")
@@ -67,7 +67,7 @@ fun TesteryPluginExtension.validate(requireEnvironment: Boolean = false) {
 }
 
 open class TesteryPluginExtension {
-    var apiKey: String? = null
+    var apiToken: String? = null
     var projectKey: String? = null
     var buildId: String? = null
     var commitHash: String? = null
