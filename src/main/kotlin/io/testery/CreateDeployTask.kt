@@ -14,9 +14,9 @@ open class CreateDeployTask : DefaultTask() {
                 commit = options.commitHash,
                 branch = options.branch
         )) {
-            println("Created deploy in Testery for build ${options.buildId} and environment ${options.environmentKey}")
+            println("Notified Testery about deploy of build ${options.buildId} of project ${options.projectKey} to environment ${options.environmentKey}")
         } else {
-            throw Exception("Failed to create deploy in Testery. Please check your configuration")
+            throw Exception("Failed to notify Testery of deploy. Please check your configuration")
         }
     }
 }

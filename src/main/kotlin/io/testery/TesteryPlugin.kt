@@ -14,11 +14,11 @@ class TesteryPlugin  : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create("testery", TesteryPluginExtension::class.java)
 
-        project.tasks.register("uploadBuild", CreateBuildTask::class.java) {
+        project.tasks.register("uploadBuildToTestery", CreateBuildTask::class.java) {
             val convention = project.convention.getPlugin(JavaPluginConvention::class.java)
             it.archiveFileName.set(TesteryPluginConstants.jarFile)
             it.group = taskGroup
-            it.description = "Upload jar file to Testery"
+            it.description = "Upload jar file to Testery for testing"
             it.configurations = project.configurations.getByName("testRuntime").all
                 .filter{ config -> config.isCanBeResolved }
             it.from(convention.sourceSets.named("test").get().output, convention.sourceSets.named("main").get().output)
@@ -28,8 +28,9 @@ class TesteryPlugin  : Plugin<Project> {
             }
         }
 
-        project.tasks.register("createDeploy", CreateDeployTask::class.java) {
+        project.tasks.register("notifyTesteryOfDeploy", CreateDeployTask::class.java) {
             it.group = taskGroup
+            it.description = "Notify Testery of a deploy"
             it.doLast { _ ->
                 it.createDeploy(extension)
             }

@@ -19,25 +19,26 @@ class TesteryPluginTests {
     fun testProjectConfiguration() {
         project.pluginManager.hasPlugin("io.testery") shouldBe true
 
-        project.tasks.getByName("uploadBuild")::class shouldNotBe CreateBuildTask::class
-        project.tasks.getByName("createDeploy")::class shouldNotBe CreateDeployTask::class
+        project.tasks.getByName("uploadBuildToTestery")::class shouldNotBe CreateBuildTask::class
+        project.tasks.getByName("notifyTesteryOfDeploy")::class shouldNotBe CreateDeployTask::class
     }
 
     @Test
     fun testUploadTaskConfig() {
-        val task = project.tasks.getByName("uploadBuild") as? CreateBuildTask
+        val task = project.tasks.getByName("uploadBuildToTestery") as? CreateBuildTask
 
         task shouldNotBe null
+        task?.group shouldBe "testery"
         task?.archiveFileName?.get() shouldBe "testery.jar"
-        task?.description shouldBe "Upload jar file to Testery"
+        task?.description shouldBe "Upload jar file to Testery for testing"
     }
 
     @Test
     fun testCreateDeployTaskConfig() {
-        val task = project.tasks.getByName("uploadBuild") as? CreateBuildTask
+        val task = project.tasks.getByName("notifyTesteryOfDeploy") as? CreateDeployTask
 
         task shouldNotBe null
-        task?.archiveFileName?.get() shouldBe "testery.jar"
-        task?.description shouldBe "Upload jar file to Testery"
+        task?.group shouldBe "testery"
+        task?.description shouldBe "Notify Testery of a deploy"
     }
 }
