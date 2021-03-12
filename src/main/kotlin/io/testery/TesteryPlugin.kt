@@ -2,6 +2,7 @@ package io.testery
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
 import org.gradle.api.plugins.JavaPluginConvention
 
 object TesteryPluginConstants {
@@ -19,8 +20,10 @@ class TesteryPlugin  : Plugin<Project> {
             it.archiveFileName.set(TesteryPluginConstants.jarFile)
             it.group = taskGroup
             it.description = "Upload jar file to Testery for testing"
-            it.configurations = project.configurations.getByName("testRuntime").all
-                .filter{ config -> config.isCanBeResolved }
+            it.configurations = extension.configurations ?: listOf(
+                project.configurations.getByName("testRuntimeClasspath"),
+                project.configurations.getByName("runtimeClasspath")
+            )
             it.from(convention.sourceSets.named("test").get().output, convention.sourceSets.named("main").get().output)
             it.exclude("META-INF/*")
             it.doLast { _ ->
@@ -73,4 +76,5 @@ open class TesteryPluginExtension {
     var commitHash: String? = null
     var branch: String? = null
     var environmentKey: String? = null
+    var configurations: List<Configuration>? = null
 }
