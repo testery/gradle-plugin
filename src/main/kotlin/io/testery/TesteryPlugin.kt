@@ -24,8 +24,9 @@ class TesteryPlugin  : Plugin<Project> {
                 project.configurations.getByName("testRuntimeClasspath"),
                 project.configurations.getByName("runtimeClasspath")
             )
+            it.manifest.inheritFrom(((project.tasks.getByName("jar") as org.gradle.jvm.tasks.Jar).manifest))
             it.from(convention.sourceSets.named("test").get().output, convention.sourceSets.named("main").get().output)
-            it.exclude("META-INF/*")
+            it.exclude("META-INF/INDEX.LIST", "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "module-info.class")
             it.doLast { _ ->
                 it.uploadToTestery(extension)
             }
